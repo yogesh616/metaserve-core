@@ -1,0 +1,26 @@
+{
+  "name": "metaserve-core",
+  "version": "1.0.0",
+  "description": "A fast, secure metadata extractor for static files with plugin support for images, audio, PDFs, and more.",
+  "keywords": [
+    "npm"
+  ],
+  "homepage": "https://github.com/yogesh616/metaserve-core#readme",
+  "bugs": {
+    "url": "https://github.com/yogesh616/metaserve-core/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yogesh616/metaserve-core.git"
+  },
+  "license": "Apache-2.0",
+  "author": "Yogesh Saini",
+  "type": "commonjs",
+  "main": "metaserve-core.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "dependencies": {
+    "image-size": "^2.0.2"
+  }
+}
