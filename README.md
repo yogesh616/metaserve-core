@@ -37,25 +37,35 @@ npm install metaserve-core
 
 ```js
 const express = require('express');
+const path = require('path');
 const MetaServe = require('metaserve-core');
 const imageParser = require('metaserve-core/plugins/ImageParser');
 
 const app = express();
-const metaServe = new MetaServe({ debug: true });
+const publicDir = path.join(__dirname, 'public');
 
-// Register image plugin
+const metaServe = new MetaServe({
+  debug: true,
+  timeout: 2000
+});
+
+// Register image plugins
 ['.jpg', '.jpeg', '.png', '.gif', '.webp'].forEach(ext =>
   metaServe.register(ext, imageParser)
 );
 
-app.use(express.static('public'));
+const metaHandler = metaServe.getHandler(publicDir);
 
-app.use((req, res, next) => {
-  const handled = metaServe.getHandler('public')(req, res);
-  if (!handled) next();
+app.use((req, res, next) =>
+  metaHandler(req, res).then(handled => handled || next())
+);
+
+app.use(express.static(publicDir));
+
+app.listen(3000, () => {
+  console.log('Server running at http://localhost:3000');
 });
 
-app.listen(3000);
 ```
 
 ---
